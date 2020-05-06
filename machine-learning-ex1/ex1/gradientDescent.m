@@ -26,12 +26,11 @@ for iter = 1:num_iters
     
     for i = 1 : m
       temp1 = temp1 + (h(i)-y(i))*X(i,1);
-      temp2 = temp2 + (h(i)-y(i))*X(i,2); 
+      temp2 = temp2 + (h(i)-y(i))*X(i,2);
     endfor
 
     theta(1) = theta(1) - (alpha/m)*temp1;
     theta(2) = theta(2) - (alpha/m)*temp2;
-
 
     % ============================================================
 
