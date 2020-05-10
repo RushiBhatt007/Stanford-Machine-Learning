@@ -25,24 +25,34 @@ grad = zeros(size(theta));
 %
 %       Each row of the resulting matrix will contain the value of the
 %       prediction for that example. You can make use of this to vectorize
-%       the cost function and gradient computations. 
+%   like:    the cost function and gradient computations. 
 %
 % Hint: When computing the gradient of the regularized cost function, 
 %       there're many possible vectorized solutions, but one solution
-%       looks like:
+%       looks 
 %           grad = (unregularized gradient for logistic regression)
 %           temp = theta; 
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+% X is 5 x 4
+% y is 5 x 1
+% thetai is 4 x 1
 
+h = sigmoid(X*theta);
 
+%J = (1/m)*sum(-y.*log(h) - (1-y).*(1-log(h)));
 
+for i=1:m
+  J = J - (1/m)*(y(i)*log(h(i)) + (1-y(i))*log(1-h(i))); 
+endfor
 
-
-
-
+for i=1:length(grad)
+  for j=1:m
+    grad(i) = grad(i) + (1/m)*(h(j)-y(j))*X(j,i);
+  endfor
+endfor
 
 
 % =============================================================
