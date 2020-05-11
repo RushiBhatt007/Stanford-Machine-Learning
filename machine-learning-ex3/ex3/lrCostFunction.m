@@ -38,22 +38,18 @@ grad = zeros(size(theta));
 
 % X is 5 x 4
 % y is 5 x 1
-% thetai is 4 x 1
+% theta is 4 x 1
 
 h = sigmoid(X*theta);
+new_theta = theta(2:end);
 
-%J = (1/m)*sum(-y.*log(h) - (1-y).*(1-log(h)));
+J = (1/m)*sum(-y.*log(h) - (1-y).*(log(1-h)));
+J = J + (lambda/(2*m))*sum(new_theta.^2);
 
-for i=1:m
-  J = J - (1/m)*(y(i)*log(h(i)) + (1-y(i))*log(1-h(i))); 
-endfor
-
-for i=1:length(grad)
-  for j=1:m
-    grad(i) = grad(i) + (1/m)*(h(j)-y(j))*X(j,i);
-  endfor
-endfor
-
+grad = (1/m)*X'*(h-y);
+new_grad = grad(2:end);
+new_grad = new_grad + (lambda/m)*new_theta;
+grad(2:end) = new_grad;
 
 % =============================================================
 

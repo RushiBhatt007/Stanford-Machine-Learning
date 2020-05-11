@@ -21,13 +21,18 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+bias = ones(m, 1);
+new_X = [bias X];
 
+output1 = new_X*Theta1';
+activate1 = sigmoid(output1);
 
+new_activate2 = [bias activate1];
 
+output2 = new_activate2*Theta2';
+activate2 = sigmoid(output2);
 
-
-
-
+[predvalue p] = max(activate2, [], 2);
 
 % =========================================================================
 
